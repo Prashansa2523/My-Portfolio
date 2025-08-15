@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Prashansa Sharma | Portfolio</title>
+<meta name="description" content=" one-page portfolio with particles, tabs, filters, and reveal animations." />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+/* =========================
+   Base & Theme
+========================= */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0b0f17;
+  --panel:#0f1625;
+  --panel-2:#121a2b;
+  --line:rgba(255,255,255,.08);
+  --text:#d2d7df;
+  --muted:#9aa5b1;
+  --white:#fff;
+  --primary:#7c3aed;  /* violet */
+  --accent:#06b6d4;   /* cyan */
+  --glow:rgba(124,58,237,.28);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;border-radius:12px}
+.wrapper{max-width:1180px;margin:0 auto;padding:0 22px}
+.section{padding:80px 0;position:relative}
+.section h2{color:var(--white);font-size:34px;letter-spacing:.4px;margin-bottom:10px}
+.section .sub{color:var(--muted);font-size:14px;margin-bottom:26px}
+
+/* =========================
+   Header 
+========================= */
+header{
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(10px);
+  background:rgba(10,14,24,.55);
+  border-bottom:1px solid var(--line);
+}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .dot{width:12px;height:12px;border-radius:999px;
+  background:linear-gradient(45deg,var(--primary),var(--accent));
+  box-shadow:0 0 20px var(--glow)}
+.brand h1{font-size:16px;font-weight:800;letter-spacing:.5px}
+.menu{display:flex;gap:18px;flex-wrap:wrap}
+.menu a{font-size:13px;color:var(--muted);padding:8px 10px;border-radius:10px;transition:.25s}
+.menu a.active,.menu a:hover{color:var(--white);background:rgba(255,255,255,.04)}
+
+/* =========================
+   Hero with particles
+========================= */
+#hero{padding:90px 0 50px;min-height:80vh;display:grid;place-items:center}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;position:relative}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:34px;color:#fff;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  padding:6px 10px;border-radius:999px;box-shadow:0 8px 28px var(--glow)}
+h1.display{font-size:48px;line-height:1.12;margin:14px 0 10px;color:#fff}
+@media(max-width:640px){h1.display{font-size:36px}}
+.gradient{background:linear-gradient(90deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:60ch}
+.cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+.button{
+  border:1px solid var(--line);color:#fff;
+  padding:11px 16px;border-radius:12px;font-weight:600;font-size:14px;
+  background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(6,182,212,.08));
+  transition:.25s transform,.25s box-shadow
+}
+.button:hover{transform:translateY(-2px);box-shadow:0 12px 34px var(--glow)}
+.button.ghost{background:transparent;color:var(--text)}
+.hero-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+  border:1px solid var(--line);border-radius:18px;padding:18px;
+  display:grid;grid-template-rows:auto 1fr;min-height:310px
+}
+.hero-card .img{aspect-ratio:1/1;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.hero-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 10px;text-align:center}
+.kpi h3{color:#fff;font-size:20px}
+.kpi p{font-size:12px;color:var(--muted)}
+/* Particle canvas behind */
+#particles{
+  position:absolute;inset:-120px -20vw -60px;z-index:-1;
+  filter:blur(.2px);opacity:.85;
+}
+
+/* =========================
+   Cards & grids
+========================= */
+.grid{display:grid;gap:18px}
+.cols-3{grid-template-columns:repeat(3,1fr)}
+.cols-2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:980px){.cols-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.cols-3,.cols-2{grid-template-columns:1fr}}
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.02));
+  border:1px solid var(--line);border-radius:16px;padding:16px
+}
+.card h4{color:#fff;font-size:16px;margin:6px 0}
+.card p{font-size:13px;color:var(--muted)}
+.pill{display:inline-block;font-size:11px;color:#cbd5e1;background:#0e1624;border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+
+/* =========================
+   Services (optional, looks like Zyan)
+========================= */
+#services .pill{margin-bottom:8px}
+
+/* =========================
+   About + Skill bars
+========================= */
+.skillbar{margin:12px 0}
+.skillbar .top{display:flex;justify-content:space-between;font-size:12px;color:#cbd5e1;margin-bottom:6px}
+.skillbar .bar{height:10px;border-radius:999px;background:#0e1624;border:1px solid var(--line);overflow:hidden}
+.skillbar .fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));width:0%}
+
+/* =========================
+   Resume Tabs
+========================= */
+.tabs{display:flex;gap:8px;margin:12px 0 18px;flex-wrap:wrap}
+.tab{cursor:pointer}
+.tab.active{outline:2px solid var(--glow)}
+.tabpanel{display:none}
+.tabpanel.active{display:block}
+
+/* =========================
+   Achievements
+========================= */
+.achv li{list-style:none;position:relative;padding-left:28px;margin:10px 0}
+.achv li:before{content:"🏆";position:absolute;left:0;top:0}
+
+/* =========================
+   Contact
+========================= */
+.contact .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.contact .row{grid-template-columns:1fr}}
+.input,.textarea{
+  width:100%;background:#0e1624;border:1px solid var(--line);color:#fff;
+  border-radius:12px;padding:12px 14px;font-size:14px;outline:none
+}
+.input:focus,.textarea:focus{box-shadow:0 0 0 3px var(--glow);border-color:transparent}
+.textarea{min-height:120px;resize:vertical}
+
+/* =========================
+   Footer
+========================= */
+footer{padding:30px 0;color:#94a3b8;text-align:center;border-top:1px solid var(--line)}
+
+/* =========================
+   Reveal on scroll
+========================= */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* =========================
+   Custom cursor (subtle)
+========================= */
+.cursor{
+  pointer-events:none;position:fixed;z-index:1000;top:0;left:0;translate:-50% -50%;
+  width:22px;height:22px;border-radius:999px;border:2px solid rgba(255,255,255,.4);
+  box-shadow:0 0 40px var(--glow);transition:width .2s,height .2s,border-color .2s,transform .1s ease
+}
+a:hover ~ .cursor,.button:hover ~ .cursor{width:30px;height:30px;border-color:#fff}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Sticky Header -->
+<header>
+  <div class="wrapper nav">
+    <div class="brand"><span class="dot"></span><h1><!-- EDIT ME -->PRASHANSA SHARMA</h1></div>
+    <nav class="menu">
+      <a href="#hero" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="hero" class="section">
+  <canvas id="particles"></canvas>
+  <div class="wrapper hero-grid">
+    <div>
+      <span class="badge">Hi, I’m <strong><!-- EDIT ME -->PRASHANSA</strong></span>
+      <h1 class="display">Creative <span class="gradient" id="type">Developer</span><br/>Coder • Problem-solver</h1>
+      <p><!-- EDIT ME -->I build clean, modern experiences with JavaScript, React Native, and strong DSA fundamentals. I love turning fuzzy ideas into shipped products.</p>
+      <div class="cta">
+        <a class="button ghost" href="#" target="_blank">Watch Demo</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="img">
+        <!-- EDIT ME: replace with your photo -->
+        <img alt="cover" src="myphoto.jpeg">
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="section reveal">
+  <div class="wrapper">
+    <h2>What I Do</h2>
+    <p class="sub">Design and development with attention to animation, accessibility, and performance.</p>
+    <div class="grid cols-3">
+      <div class="card">
+        <span class="pill">Web UI</span>
+        <h4>Portfolio Design</h4>
+        <p>Portfolios with modern layouts, SEO semantics, and micro-interactions.</p>
+      </div>
+      <div class="card">
+        <span class="pill">Mobile</span>
+        <h4>React Native Apps</h4>
+        <p>Pixel-tight apps with clean state, smooth navigation, and offline-first patterns.</p>
+      </div>
+      <div class="card">
+        <span class="pill">Algorithms</span>
+        <h4>DSA Enthusiast</h4>
+        <p>Data structures, complexity analysis, and performance-minded problem solving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About & Skills -->
+<section id="about" class="section reveal">
+  <div class="wrapper">
+    <h2>About Me</h2>
+    <p class="sub"> DSA Enthusiast • React Native Developer• UI/UX Developer </p>
+    <div class="grid cols-2">
+      <div class="card">
+        <h4><!-- EDIT ME -->Who I Am</h4>
+        <p><!-- EDIT ME -->I’m a BTech (CSE-IoT) student who enjoys building delightful interfaces and solving tough problems. I focus on clean code, accessibility, and performance.</p>
+        <div class="skills" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="pill">JavaScript</span><span class="pill">C++</span><span class="pill">HTML</span>
+          <span class="pill">React Native</span><span class="pill">DSA</span><span class="pill">Git & GitHub</span><span class="pill">UI/UX</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Skills (Bars)</h4>
+        <div class="skillbar">
+          <div class="top"><span>JavaScript</span><span>85%</span></div>
+          <div class="bar"><div class="fill" style="--pct:85%"></div></div>
+        </div>
+        <div class="skillbar">
+          <div class="top"><span>React Native</span><span>80%</span></div>
+          <div class="bar"><div class="fill" style="--pct:80%"></div></div>
+        </div>
+        <div class="skillbar">
+          <div class="top"><span>DSA</span><span>75%</span></div>
+          <div class="bar"><div class="fill" style="--pct:75%"></div></div>
+        </div>
+ </div>
+        <div class="skillbar">
+          <div class="top"><span>C++</span><span>75%</span></div>
+          <div class="bar"><div class="fill" style="--pct:75%"></div></div>
+        </div>
+        <div class="skillbar">
+          <div class="top"><span>UI/UX</span><span>50%</span></div>
+          <div class="bar"><div class="fill" style="--pct:50%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Resume with Tabs -->
+<section id="resume" class="section reveal">
+  <div class="wrapper">
+    <h2>Resume</h2>
+    <div class="tabs">
+      <span class="pill tab" data-target="#edu">Education</span>
+      <span class="pill tab" data-target="#skills">Core Skills</span>
+    </div>
+
+    <div class="card tabpanel" id="edu">
+      <h4>Education</h4>
+      <ul class="achv">
+        <li><!-- EDIT ME -->BTech — CSE (IoT)</li>
+        <li>Focused tracks: DSA, Android Development</li>
+      </ul>
+    </div>
+
+    <div class="card tabpanel" id="skills">
+      <h4>Core Skills</h4>
+      <div class="skills" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <span class="pill">JavaScript</span><span class="pill">React Native</span><span class="pill">DSA</span>
+        <span class="pill">C++ / Java</span><span class="pill">Git & GitHub</span><span class="pill">UI/UX • Accessibility</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Achievements -->
+<section id="achievements" class="section reveal">
+  <div class="wrapper">
+    <h2>Achievements</h2>
+    <div class="grid cols-2">
+      <div class="card">
+        <h4>Hackathons</h4>
+        <ul class="achv">
+          <li><!-- EDIT ME -->Top 4 Finalist — FITT Tech Future Hackathon @ IIT Delhi (2025)</li>
+           <li><!-- EDIT ME -->First Runner-Up — TechVille-A-Thon </li>
+          <li><!-- EDIT ME -->Finalist — Sprinthack by KIET GDG</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Highlights</h4>
+        <p>Track record building practical solutions under time pressure, with clean code and solid DSA thinking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section reveal contact">
+  <div class="wrapper">
+    <h2>Contact</h2>
+    <p class="sub">Let’s build something useful together.</p>
+    <div class="grid cols-2">
+      <div class="card">
+        <p><strong>Email:</strong> <a href="prashansasharma2525@gmail.com"><!-- EDIT ME -->prashansasharma2525@gmail.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="#" target="_blank"><!-- EDIT ME -->https://www.linkedin.com/in/prashansasharma/</a></p>
+        <p><strong>GitHub:</strong> <a href="#" target="_blank"><!-- EDIT ME -->https://github.com/Prashansa2523</a></p>
+      </div>
+      <div class="card">
+        <!-- Static form (demo) -->
+        <form onsubmit="alert('Thanks! This demo form is static. Connect Formspree/Netlify to receive emails.');return false;">
+          <div class="row">
+            <input class="input" placeholder="Your name" required />
+            <input class="input" type="email" placeholder="Your email" required />
+          </div>
+          <textarea class="textarea" placeholder="Your message"></textarea>
+          <button class="button" type="submit" style="margin-top:10px">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrapper">© 2025 <!-- EDIT ME -->PRASHANSA SHARMA • Crafted with HTML/CSS/JS</div>
+</footer>
+
+<script>
+/* =========================
+   Typewriter word switch
+========================= */
+(function(){
+  const words=["Developer","Coder","Problem-solver","Designer"];
+  let i=0, el=document.getElementById("type");
+  setInterval(()=>{ i=(i+1)%words.length; el.textContent=words[i]; },1600);
+})();
+
+/* =========================
+   Reveal on scroll
+========================= */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} });
+},{threshold:.16});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* Fill skill bars when visible */
+const bars=document.querySelectorAll('.fill');
+const ioBars=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const pct=e.target.style.getPropertyValue('--pct')||'70%';
+      e.target.style.width=pct;
+      ioBars.unobserve(e.target);
+    }
+  });
+},{threshold:.6});
+bars.forEach(b=>ioBars.observe(b));
+
+/* =========================
+   Active nav highlight
+========================= */
+const sections=[...document.querySelectorAll('section[id]')];
+const links=[...document.querySelectorAll('.menu a')];
+const spy=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id='#'+e.target.id;
+      links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')===id));
+    }
+  });
+},{rootMargin:"-50% 0px -45% 0px"});
+sections.forEach(s=>spy.observe(s));
+
+/* =========================
+   Tabs
+========================= */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const id=t.getAttribute('data-target');
+    document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+    document.querySelector(id).classList.add('active');
+  });
+});
+
+
+
+/* =========================
+   Particles (lightweight)
+========================= */
+(function(){
+  const c=document.getElementById('particles');
+  const ctx=c.getContext('2d');
+  let w,h,pr=window.devicePixelRatio||1,particles=[];
+  function resize(){ w=innerWidth; h=400; c.width=w*pr; c.height=h*pr; c.style.height=h+'px'; ctx.setTransform(pr,0,0,pr,0,0); }
+  function make(n){
+    particles=Array.from({length:n},()=>({
+      x:Math.random()*w,
+      y:Math.random()*h,
+      vx:(Math.random()-.5)*.6,
+      vy:(Math.random()-.5)*.6,
+      r:Math.random()*2+0.6,
+      hue:Math.random()>.5?280:190
+    }));
+  }
+  function step(){
+    ctx.clearRect(0,0,w,h);
+    for(const p of particles){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>w) p.vx*=-1;
+      if(p.y<0||p.y>h) p.vy*=-1;
+      ctx.beginPath();
+      const grad=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);
+      grad.addColorStop(0,`hsla(${p.hue},90%,60%,.9)`);
+      grad.addColorStop(1,'transparent');
+      ctx.fillStyle=grad;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    // connect lines
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const a=particles[i], b=particles[j];
+        const dx=a.x-b.x, dy=a.y-b.y, d=dx*dx+dy*dy;
+        if(d<140*140){
+          ctx.strokeStyle=`rgba(124,58,237,${1-d/(140*140)})`;
+          ctx.lineWidth=.5;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  resize(); make(52); step();
+  addEventListener('resize',()=>{resize(); make(52);});
+})();
+
+/* =========================
+   Custom cursor
+========================= */
+const cursor=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX+'px';
+  cursor.style.top=e.clientY+'px';
+});
+</script>
+</body>
+</html>
